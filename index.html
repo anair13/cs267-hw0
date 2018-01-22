@@ -1,0 +1,122 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-57252749-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-57252749-1');
+</script>
+
+<link rel="StyleSheet" href="style.css" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Deep Learning for AI</title>
+<style type="text/css">
+#primarycontent h1 {
+  font-variant: small-caps;
+}
+#primarycontent h3 {
+}
+#primarycontent teasertext {
+  text-align: center;
+}
+#primarycontent p {
+  text-align: center;
+}
+#primarycontent {
+  text-align: justify;
+}
+#primarycontent p {
+  text-align: justify;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#primarycontent p iframe {
+  text-align: center;
+}
+.featart {
+  margin:4px;
+}
+.hoverdiv {
+  background-color:black;
+  margin-top:2px;
+  margin-bottom:10px;
+  width:100%;
+}
+.hoverdiv:hover {
+  background-color:white;
+}
+
+iframe {
+  margin: auto;
+}
+</style>
+
+<script type="text/javascript">
+  function togglevis(elid){
+    el=document.getElementById(elid);
+    aelid=elid+"a";
+    ael=document.getElementById(aelid);
+    if(el.style.display=='none'){
+      el.style.display='inline-table';
+      ael.innerHTML="[Hide BibTex]";
+    }else{
+      el.style.display='none';
+      ael.innerHTML="[Show BibTex]";
+    }
+  }
+</script>
+<script type="text/javascript"
+  src="http://www.maths.nottingham.ac.uk/personal/drw/LaTeXMathML.js">
+</script>
+<!--
+<script type="text/javascript" src="http://math.etsu.edu/LaTeXMathML/LaTeXMathML.js"></script>
+<link rel="stylesheet" type="text/css" href="http://math.etsu.edu/LaTeXMathML/LaTeXMathML.standardarticle.css" />
+-->
+
+</head>
+<body>
+<div id="primarycontent">
+<h1 align="center" itemprop="name"><strong>Overcoming Exploration in Reinforcement Learning <br />with Demonstrations</strong></h1>
+
+<center>
+<ul id="people" itemprop="accountablePerson">
+	<li><h4>Ashvin Nair, Bob McGrew, Marcin Andrychowicz, Wojciech Zaremba, Pieter Abbeel</h4></li>
+</ul>
+</center>
+
+<img src="img/s6.jpg" itemprop="image" width="800" alt="teaserImage">
+
+<h3>Abstract</h3>
+
+
+<p>Exploration in environments with sparse rewards has been a persistent problem in reinforcement learning (RL). Many tasks are natural to specify with a sparse reward, and manually shaping a reward function can result in suboptimal performance. However, finding a non-zero reward is exponentially more difficult with increasing task horizon or action dimensionality. This puts many real-world tasks out of practical reach of RL methods. In this work, we use demonstrations to overcome the exploration problem and successfully learn to perform long-horizon, multi-step robotics tasks with continuous control such as stacking blocks with a robot arm. Our method, which builds on top of Deep Deterministic Policy Gradients and Hindsight Experience Replay, provides an order of magnitude of speedup over RL on simulated robotics tasks. It is simple to implement and makes only the additional assumption that we can collect a small set of demonstrations. Furthermore, our method is able to solve tasks not solvable by either RL or behavior cloning alone, and often ends up outperforming the demonstrator policy.
+</p>
+
+<h3 style="clear:both">Video</h3>
+<p style="padding-left: 10px; padding-right: 10px;">
+<table style="margin: 0 auto">
+  <tr>
+    <td>
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/RXENnTdg1IQ" frameborder="0" allowfullscreen></iframe>
+      <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/8SGE1gGi4u8" frameborder="0" allowfullscreen></iframe> -->
+    </td>
+  </tr>
+</table>
+</p>
+
+<h3>Paper</h3>
+  <p style="padding-left: 10px; padding-right: 10px;">
+    Preprint of the paper is available at: <a href='https://arxiv.org/abs/1709.10089'>[pdf]</a>
+  </p>
+
+<p style="padding-left: 10px; padding-right: 10px;">
+This was work done at <a href="https://openai.com/">OpenAI</a>. For comments or questions, contact <a href="http://ashvin.me">Ashvin Nair</a>. The template for this website has been adopted from Carl Doersch.
+</p>
+
+</div>
+
+</body>
+</html>
