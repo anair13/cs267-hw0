@@ -79,41 +79,34 @@ iframe {
 </head>
 <body>
 <div id="primarycontent">
-<h1 align="center" itemprop="name"><strong>Overcoming Exploration in Reinforcement Learning <br />with Demonstrations</strong></h1>
+<h1 align="center" itemprop="name"><strong>Parallel Computing for Computer Vision</strong></h1>
 
 <center>
 <ul id="people" itemprop="accountablePerson">
-	<li><h4>Ashvin Nair, Bob McGrew, Marcin Andrychowicz, Wojciech Zaremba, Pieter Abbeel</h4></li>
+	<li><h4>Ashvin Nair</h4></li>
 </ul>
 </center>
 
-<img src="img/s6.jpg" itemprop="image" width="800" alt="teaserImage">
+<!-- <img src="img/s6.jpg" itemprop="image" width="800" alt="teaserImage"> -->
 
-<h3>Abstract</h3>
-
-
-<p>Exploration in environments with sparse rewards has been a persistent problem in reinforcement learning (RL). Many tasks are natural to specify with a sparse reward, and manually shaping a reward function can result in suboptimal performance. However, finding a non-zero reward is exponentially more difficult with increasing task horizon or action dimensionality. This puts many real-world tasks out of practical reach of RL methods. In this work, we use demonstrations to overcome the exploration problem and successfully learn to perform long-horizon, multi-step robotics tasks with continuous control such as stacking blocks with a robot arm. Our method, which builds on top of Deep Deterministic Policy Gradients and Hindsight Experience Replay, provides an order of magnitude of speedup over RL on simulated robotics tasks. It is simple to implement and makes only the additional assumption that we can collect a small set of demonstrations. Furthermore, our method is able to solve tasks not solvable by either RL or behavior cloning alone, and often ends up outperforming the demonstrator policy.
+<h3>About Me</h3>
+<p>I am a first year graduate student in the BAIR group interested in computer vision and reinforcement learning. From this class, first I would like to gain an appreciation of the challenges and possibilities in parallel computing, and get a sense of the large-scale problems people are trying to solve today. Second, I would like practical knowledge about speeding up physical simulations and machine learning algorithms. My research is often blocked by the result of large computational workloads. Specifically, I make extensive use of a robotics simulator, <a href="http://www.mujoco.org/">MuJoCo</a>, and fitting large neural networks including convolutional neural networks or non-standard compute-heavy layers. Both of these can potentially be parallelized, especially on the GPU.
 </p>
 
-<h3 style="clear:both">Video</h3>
-<p style="padding-left: 10px; padding-right: 10px;">
-<table style="margin: 0 auto">
-  <tr>
-    <td>
-      <iframe width="640" height="360" src="https://www.youtube.com/embed/RXENnTdg1IQ" frameborder="0" allowfullscreen></iframe>
-      <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/8SGE1gGi4u8" frameborder="0" allowfullscreen></iframe> -->
-    </td>
-  </tr>
-</table>
+<h3>CUDA for Image Recognition</h3>
+<p>A key problem in computer vision is recognition: given an image, autonomously label the contents of the image. This problem has a long history and until a few years ago, it was still relatively unsolved. The ImageNet competition became a standard benchmark in this community. ImageNet is a public dataset of millions of images each labeled by humans as one of a thousand classes such as "dog", "tank", "cheeseburger", or "volcano". Competition entrants train an image recognition model using this data, and are evaluated on their performance on a held-out set.</p>
+
+<p>While most entries mostly used delicately engineered computer vision pipelines and achieved around 25% error rates similar to previous years, the winning entry from University of Toronto used a large convolutional neural network trained end-to-end on this dataset, obtaining an error rate of around 15%. Even though they used CUDA to train the neural network, the final network, now commonly called AlexNet, still took 5-6 days to train; without parallelization, the training requirements would have been almost impossible at the time. The subsequent impact on image recognition is shown below: since 2012, more and more entries are using GPUs to train their systems and further improving the accuracy dramatically.
+</p>
+<center><img src="img/imagenet.png" itemprop="image" width="400" alt="teaserImage"></center>
+<h3>Computational Challenges</h3>
+<p>AlexNet includes about 60 million parameters, many reused by performing convolutions on the input image. To run such a network forward to obtain predictions, a back-of-the-envelope calculation suggests about 500M operations (likely more). Training such a network on a single image also involves a backward pass of roughly the same complexity. The training set used is about 1 million images and the training set is reused about 100 times during training. So in total, successfully training the network once takes about 1e17 operations. For context, the most powerful supercomputer at the time (IBM Sequoia) performed around 1e16 flop/s (peak), and the top commodity CPU was performing than 1e10 flop/s. This means the network would likely take on the order of 100 days to train on a CPU. Furthermore, the usual workflow for improving network performance may involve repeatedly training such a network.
 </p>
 
-<h3>Paper</h3>
-  <p style="padding-left: 10px; padding-right: 10px;">
-    Preprint of the paper is available at: <a href='https://arxiv.org/abs/1709.10089'>[pdf]</a>
-  </p>
+<p>To solve this problem, AlexNet was instead implemented to run in parallel on a machine with 2 GPUs (=4e11 flop/s) using CUDA. This choice takes advantage of some properties of training neural networks: the computation is mostly simple linear algebra operations and "batch" gradient descent over several points of data is often more stable and lends itself naturally to data parallelism. Assuming the numbers above, this brings optimal training time to around 3 days. This means the parallel implementation was about 50% efficient. Given that the task involves loading large amounts of data (the training data is about 50GB) and many of the subroutines (such as convolution on the GPU) were self-defined and therefore likely not perfectly optimized, the efficiency is actually surprisingly good to me. Showing that this training procedure was actually possible spurred a lot of interest in deep learning, which has since performed extremely well on other artificial intelligence tasks, such as speech recognition.
+</p>
 
-<p style="padding-left: 10px; padding-right: 10px;">
-This was work done at <a href="https://openai.com/">OpenAI</a>. For comments or questions, contact <a href="http://ashvin.me">Ashvin Nair</a>. The template for this website has been adopted from Carl Doersch.
+<p style="padding-left: 10px; padding-right: 10px;">The template for this website has been adopted from Carl Doersch.
 </p>
 
 </div>
